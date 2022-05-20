@@ -35,20 +35,19 @@ azul = (0,0,255)
 def texto (msg, cor):
     texto1 = font.render(msg, True, cor)
     window.blit(texto1, [650, 280])
-    pygame.display.flip
+
+window.blit(imagem_inicial, (0, 0))
+pygame.draw.rect(window, verde, [500, 250, 500, 150])
+texto('Jogar', branco)
 
 while game: #looping enquanto game = True
     for event in pygame.event.get(): 
         if event.type == pygame.QUIT:
             game = False
-    
-    window.blit(imagem_inicial, (0, 0))
+
+    '''window.blit(imagem_inicial, (0, 0))
     pygame.draw.rect(window, verde, [500, 250, 500, 150])
-    texto('Jogar', branco)
-
-
-
-
+    texto('Jogar', branco)'''
     if event.type == pygame.MOUSEBUTTONDOWN:
         x = pygame.mouse.get_pos()[0]
         y =  pygame.mouse.get_pos()[1]
