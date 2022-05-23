@@ -51,7 +51,7 @@ while game: #looping enquanto game = True
     if event.type == pygame.MOUSEBUTTONDOWN:
         x = pygame.mouse.get_pos()[0]
         y =  pygame.mouse.get_pos()[1]
-        if x > 500 and y > 250 and x < 1000 and y < 650:
+        if x > 500 and y > 250 and x < 1000 and y < 400:
             window.blit(gramado, (0, 0))
             window.blit(brasil, ((largura/2+50), (altura/2-200)))
             window.blit(argentina, ((largura/2+50), (altura/2+50)))
