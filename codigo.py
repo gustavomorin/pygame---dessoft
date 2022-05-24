@@ -30,6 +30,7 @@ logo= pygame.image.load("assets/logo.png").convert_alpha()#imagem logo do jogo
 logo=pygame.transform.scale(logo, (700,350))#posicão do logo
 goleiro=pygame.image.load("assets/Goleiro.jpeg").convert()
 goleiro=pygame.transform.scale(goleiro,(largura,altura))
+luva = 0
 
 #cores
 branco = (255,255,255)
@@ -82,8 +83,19 @@ while status != QUIT:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x = pygame.mouse.get_pos()[0] #pega a posicao do x (mouse)
                 y =  pygame.mouse.get_pos()[1] #pega a posicao do y (mouse)
-                if x > (0) and y > (0) and x < 1500 and y < 700:
+                if x > (largura/2+50) and y > (altura/2-200) and x < largura/2+350 and y < altura/2-50:
+                    luva = 'amarelo'
                     status = GAME
+                if x > (largura/2+50) and y > (altura/2+50) and x < largura/2+350 and y < altura/2+200:
+                    luva = 'azul'
+                    status = GAME
+                if x > (largura/2-350) and y > (altura/2-200) and x < largura/2-50 and y < altura/2-50:
+                    luva = 'preto'
+                    status = GAME
+                if x > (largura/2-350) and y > (altura/2+50) and x < largura/2-50 and y < altura/2+200:
+                    luva = 'vermelho'
+                    status = GAME
+
 
         window.blit(gramado, (0, 0))
         window.blit(brasil, ((largura/2+50), (altura/2-200)))
@@ -95,6 +107,9 @@ while status != QUIT:
 
     while status == GAME: #looping enquanto game = True
         clock.tick(FPS)
+        for event in pygame.event.get(): 
+            if event.type == pygame.QUIT:
+                status = QUIT
         window.blit(goleiro, (0, 0))
         pygame.display.update()
 
