@@ -28,6 +28,9 @@ gramado = pygame.image.load('assets/gramado.png').convert() #imagem gramado
 gramado = pygame.transform.scale(gramado, (largura, altura)) #posicao imagem gramado
 logo= pygame.image.load("assets/logo.png").convert_alpha()#imagem logo do jogo
 logo=pygame.transform.scale(logo, (700,350))#posicão do logo
+goleiro=pygame.image.load("assets/Goleiro.jpeg").convert()
+goleiro=pygame.transform.scale(goleiro,(largura,altura))
+
 #cores
 branco = (255,255,255)
 preto = (0,0,0)
@@ -79,7 +82,7 @@ while status != QUIT:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x = pygame.mouse.get_pos()[0] #pega a posicao do x (mouse)
                 y =  pygame.mouse.get_pos()[1] #pega a posicao do y (mouse)
-                if x > 500 and y > 250 and x < 1000 and y < 400:
+                if x > (0) and y > (0) and x < 1500 and y < 700:
                     status = GAME
 
         window.blit(gramado, (0, 0))
@@ -92,7 +95,7 @@ while status != QUIT:
 
     while status == GAME: #looping enquanto game = True
         clock.tick(FPS)
-
+        window.blit(goleiro, (0, 0))
         pygame.display.update()
 
 pygame.quit()
