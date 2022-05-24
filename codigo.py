@@ -30,6 +30,17 @@ logo= pygame.image.load("assets/logo.png").convert_alpha()#imagem logo do jogo
 logo=pygame.transform.scale(logo, (700,350))#posicão do logo
 goleiro=pygame.image.load("assets/Goleiro.jpeg").convert()
 goleiro=pygame.transform.scale(goleiro,(largura,altura))
+luva_brasil = pygame.image.load('assets\Luva_Brasil.png').convert_alpha()
+luva_brasil = pygame.transform.scale(luva_brasil, (500, 250))
+luva_argentina = pygame.image.load('assets\Luva_Argentina.png').convert_alpha()
+luva_argentina = pygame.transform.scale(luva_argentina, (500, 250))
+luva_alemanha = pygame.image.load('assets\Luva_Alemanha.png').convert_alpha()
+luva_alemanha = pygame.transform.scale(luva_alemanha, (500, 250))
+luva_franca = pygame.image.load('assets\Luva_França.png').convert_alpha()
+luva_franca = pygame.transform.scale(luva_franca, (500, 250))
+bola = pygame.image.load('assets/bola.png').convert_alpha()
+bola = pygame.transform.scale(bola, (200, 200))
+
 luva = 0
 
 #cores
@@ -84,16 +95,16 @@ while status != QUIT:
                 x = pygame.mouse.get_pos()[0] #pega a posicao do x (mouse)
                 y =  pygame.mouse.get_pos()[1] #pega a posicao do y (mouse)
                 if x > (largura/2+50) and y > (altura/2-200) and x < largura/2+350 and y < altura/2-50:
-                    luva = 'amarelo'
+                    luva = 'brasil'
                     status = GAME
                 if x > (largura/2+50) and y > (altura/2+50) and x < largura/2+350 and y < altura/2+200:
-                    luva = 'azul'
+                    luva = 'argentina'
                     status = GAME
                 if x > (largura/2-350) and y > (altura/2-200) and x < largura/2-50 and y < altura/2-50:
-                    luva = 'preto'
+                    luva = 'alemanha'
                     status = GAME
                 if x > (largura/2-350) and y > (altura/2+50) and x < largura/2-50 and y < altura/2+200:
-                    luva = 'vermelho'
+                    luva = 'franca'
                     status = GAME
 
 
@@ -107,10 +118,23 @@ while status != QUIT:
 
     while status == GAME: #looping enquanto game = True
         clock.tick(FPS)
+        window.blit(goleiro, (0, 0))
+        if luva == 'brasil':
+                window.blit(bola, ((largura/2),(altura/2)))
+                window.blit(luva_brasil, ((largura/2),(altura/2)))
+        elif luva == 'argentina':
+            window.blit(bola, ((largura/2),(altura/2)))
+            window.blit(luva_argentina, ((largura/2),(altura/2)))
+        elif luva == 'alemanha':
+            window.blit(bola, ((largura/2),(altura/2)))
+            window.blit(luva_alemanha, ((largura/2),(altura/2)))
+        elif luva == 'franca':
+            window.blit(bola, ((largura/2),(altura/2)))
+            window.blit(luva_franca, ((largura/2),(altura/2)))
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 status = QUIT
-        window.blit(goleiro, (0, 0))
+
         pygame.display.update()
 
 pygame.quit()
