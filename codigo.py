@@ -3,6 +3,7 @@ from cgitb import text
 from multiprocessing.pool import INIT
 from tkinter import font
 import pygame 
+import random
 
 pygame.init() #iniciando o pygame
 
@@ -40,8 +41,24 @@ luva_franca = pygame.image.load('assets\Luva_França.png').convert_alpha()
 luva_franca = pygame.transform.scale(luva_franca, (500, 250))
 bola = pygame.image.load('assets/bola.png').convert_alpha()
 bola = pygame.transform.scale(bola, (200, 200))
-
 luva = 0
+'''
+#classe
+class ball(pygame.sprite.Sprite):
+    def __init__(self, img):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.x = random.randint(0, largura - 200)
+        self.rect.y = random.randint(0, altura - 200)
+        self.speedx = random.randint(-3,3)
+        self.speedy = random.randint(2,9)
+    
+    def update(self):
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+
+bola1 = ball(bola)'''
 
 #cores
 branco = (255,255,255)
@@ -119,22 +136,30 @@ while status != QUIT:
     while status == GAME: #looping enquanto game = True
         clock.tick(FPS)
         window.blit(goleiro, (0, 0))
+        mx,my= pygame.mouse.get_pos()
+        '''bola1.update()'''
         if luva == 'brasil':
                 window.blit(bola, ((largura/2),(altura/2)))
-                window.blit(luva_brasil, ((largura/2),(altura/2)))
+                window.blit(luva_brasil, ((mx),(my)))
+                pygame.display.flip()
+                pygame.display.update()
         elif luva == 'argentina':
             window.blit(bola, ((largura/2),(altura/2)))
-            window.blit(luva_argentina, ((largura/2),(altura/2)))
+            window.blit(luva_argentina, ((mx),(my)))
+            pygame.display.flip()
         elif luva == 'alemanha':
             window.blit(bola, ((largura/2),(altura/2)))
-            window.blit(luva_alemanha, ((largura/2),(altura/2)))
+            window.blit(luva_alemanha, ((mx),(my)))
+            pygame.display.flip()
         elif luva == 'franca':
             window.blit(bola, ((largura/2),(altura/2)))
-            window.blit(luva_franca, ((largura/2),(altura/2)))
+            window.blit(luva_franca, ((mx),(my)))
+            pygame.display.flip()
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 status = QUIT
 
         pygame.display.update()
+    
 
 pygame.quit()
