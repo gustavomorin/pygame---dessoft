@@ -1,5 +1,6 @@
 import pygame
-
+import random
+from config import *
 class Luva(pygame.sprite.Sprite):
 
     def __init__(self, img, x, y):
@@ -15,3 +16,28 @@ class Luva(pygame.sprite.Sprite):
 
     def update(self):
         pass
+
+class Bola(pygame.sprite.Sprite):
+    def __init__(self, img, x, y, tx, ty, sinal):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.rect = self.image.get_rect()
+
+        self.rect.x=x
+        self.rect.y=y
+
+        self.troca_vel = True
+        self.sinal = sinal
+        self.d_x = random.randint(-15, 15)
+        self.d_y = random.randint(-15,15)
+        self.viva = True
+        
+#(self.sinal*(self.d_x**2+100)**(1/2))
+    def update(self):
+        self.rect.x +=self.d_x
+        self.rect.y += self.d_y
+        self.troca_vel = False
+
+        if self.rect.x>=largura or self.rect.x < 0 or self.rect.y >= altura or self.rect.y < 0:
+            self.viva = False

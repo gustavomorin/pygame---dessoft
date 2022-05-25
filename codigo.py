@@ -38,6 +38,7 @@ font = pygame.font.SysFont(None, 100) #fonte
 
 
 status = INICIAL
+luva = None
 while status != QUIT:
 
     if status == INICIAL:
@@ -74,6 +75,6 @@ while status != QUIT:
         pygame.display.update()
 
     if status == GAME:
-        status = tela_game(window)    
+        status = tela_game(window, luva)    
 
 pygame.quit()
