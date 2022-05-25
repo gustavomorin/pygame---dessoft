@@ -3,6 +3,7 @@ INICIAL = 0
 QUIT = -1
 SELECT_COUNTRY = 1
 GAME = 2
+OVER = 3
 
 altura = 700
 largura = 1500

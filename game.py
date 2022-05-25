@@ -1,3 +1,4 @@
+from sqlalchemy import over
 from sprites import *
 from config import *
 import random
@@ -18,8 +19,6 @@ def tela_game(window, luva):
     goleiro=pygame.transform.scale(goleiro,(largura,altura))#posicao da imagem do gol
     bola_img = pygame.image.load('assets/bola.png').convert_alpha()#imagem da bola
     bola_img = pygame.transform.scale(bola_img, (200, 200))#tamanho da bola
-    errou=pygame.image.load("assets\errou.jpg").convert_alpha()
-    errou=pygame.transform.scale(errou,(200,200))
     pos_bolax=largura/2-50
     pos_bolay=altura/2-150
     bola=None
@@ -54,23 +53,10 @@ def tela_game(window, luva):
         clock.tick(FPS)
 
         window.blit(goleiro, (0, 0))
-        '''if troca_vel:
-            traj_y=random.randint(-5,5)
-            traj_x=(-traj_y**2+225)**(1/2)
-            sinal = random.randint(0,1)
-            if sinal == 1:
-                traj_x = -traj_x
-            troca_vel = False'''
         
         mx,my= pygame.mouse.get_pos()
         luva.rect.centerx = mx
         luva.rect.centery = my
-        '''pos_bolax = bola1.rect.x
-        pos_bolay = bola1.rect.y
-        if pos_bolax>=largura or pos_bolax < 0 or pos_bolay >= altura or pos_bolay < 0:
-            pos_bolax = largura/2-50
-            pos_bolay = altura/2-150
-            bola1.troca_vel=True'''
         bolas = pygame.sprite.spritecollide(luva, all_bola, True, pygame.sprite.collide_mask)
         if len(bolas)>0:
             if bola != None:
@@ -80,6 +66,8 @@ def tela_game(window, luva):
             all_sprites.add(bola)
             all_sprites.add(luva)
             all_bola.add(bola)
+        #if pos_bolax >= largura or pos_bolay >= altura or pos_bolax<= largura or pos_bolay<= altura:
+            #status= OVER
 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:

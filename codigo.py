@@ -6,6 +6,7 @@ import pygame
 import random
 from config import *
 from game import tela_game
+from over import tela_final
 from util import *
 from inicial import tela_inicial
 
@@ -26,8 +27,6 @@ franca = pygame.image.load('assets/franca.png').convert() #bandeira franca
 franca = pygame.transform.scale(franca, (300,150)) #posicao bandeira franca
 gramado = pygame.image.load('assets/gramado.png').convert() #imagem gramado
 gramado = pygame.transform.scale(gramado, (largura, altura)) #posicao imagem gramado
-errou = pygame.image.load('assets\errou.jpg').convert_alpha()#imagem da bola
-errou = pygame.transform.scale(errou, (200, 200))#
 pos_bolax=largura/2-50
 pos_bolay=altura/2-150
 troca_vel = True
@@ -75,6 +74,9 @@ while status != QUIT:
         pygame.display.update()
 
     if status == GAME:
-        status = tela_game(window, luva)    
+        status = tela_game(window, luva)   
+
+    if status == OVER:
+        status =  tela_final(window)
 
 pygame.quit()
