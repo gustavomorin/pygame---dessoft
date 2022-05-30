@@ -78,6 +78,6 @@ while status != QUIT:
 
     if status == OVER:
         status =  tela_final(window)
-
+    
 
 pygame.quit()
