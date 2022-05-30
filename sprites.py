@@ -20,7 +20,7 @@ class Luva(pygame.sprite.Sprite):
 class Bola(pygame.sprite.Sprite):
     def __init__(self, img, x, y, tx, ty, sinal):
         pygame.sprite.Sprite.__init__(self)
-
+        self.image_original = img
         self.image = img
         self.rect = self.image.get_rect()
 
@@ -31,13 +31,18 @@ class Bola(pygame.sprite.Sprite):
         self.sinal = sinal
         self.d_x = random.randint(-15, 15)
         self.d_y = random.randint(-15,15)
-        self.viva = True
+        self.profundidade = 50
         
 #(self.sinal*(self.d_x**2+100)**(1/2))
     def update(self):
-        self.rect.x +=self.d_x
+        self.profundidade += 1
+        c = self.rect
+        self.image = pygame.transform.scale(self.image_original, (2*self.profundidade, 2*self.profundidade))
+        self.rect = self.image.get_rect()
+        self.rect = c
+        self.rect.x += self.d_x
         self.rect.y += self.d_y
         self.troca_vel = False
 
         if self.rect.x>=largura or self.rect.x < 0 or self.rect.y >= altura or self.rect.y < 0:
-            self.viva = False
+            self.kill()

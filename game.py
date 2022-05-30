@@ -1,4 +1,5 @@
-from sqlalchemy import over
+from inicial import tela_inicial
+from over import *
 from sprites import *
 from config import *
 import random
@@ -34,7 +35,6 @@ def tela_game(window, luva):
         luva_img = luva_argentina
     
     luva = Luva(luva_img, mx, my)
-        
     status = GAME
     clock = pygame.time.Clock()
     troca_vel = True
@@ -66,15 +66,14 @@ def tela_game(window, luva):
             all_sprites.add(bola)
             all_sprites.add(luva)
             all_bola.add(bola)
-        #if pos_bolax >= largura or pos_bolay >= altura or pos_bolax<= largura or pos_bolay<= altura:
-            #status= OVER
+        if len(all_bola) == 0:
+           status = OVER
 
         for event in pygame.event.get(): 
             if event.type == pygame.QUIT:
                 status = QUIT
 
         all_sprites.update()
-
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(goleiro, (0, 0))
         all_sprites.draw(window)
