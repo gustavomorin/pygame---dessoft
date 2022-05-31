@@ -20,6 +20,8 @@ def tela_game(window, luva):
     goleiro=pygame.transform.scale(goleiro,(largura,altura))#posicao da imagem do gol
     bola_img = pygame.image.load('assets/bola.png').convert_alpha()#imagem da bola
     bola_img = pygame.transform.scale(bola_img, (200, 200))#tamanho da bola
+    defesa=pygame.image.load("assets/defesa.png").convert_alpha()#imagem da defesa
+    defesa=pygame.transform.scale(defesa,(largura,altura))#posicao da imagem da defesa
     pos_bolax=largura/2-50
     pos_bolay=altura/2-150
     bola=None
@@ -66,6 +68,8 @@ def tela_game(window, luva):
             all_sprites.add(bola)
             all_sprites.add(luva)
             all_bola.add(bola)
+            window.blit(defesa, (0,0))
+            pygame.display.update()
         if len(all_bola) == 0:
            status = OVER
 

@@ -17,7 +17,6 @@ def tela_final(window):
                 x = pygame.mouse.get_pos()[0] #pega a posicao do x (mouse)
                 y =  pygame.mouse.get_pos()[1] #pega a posicao do y (mouse)
                 if x > 500 and y > 450 and x < 1000 and y < 550:
-                    print('eu to aqui louco')
                     status = SELECT_COUNTRY
         window.blit(over, (0, 0))
         #botao
