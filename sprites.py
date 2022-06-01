@@ -1,6 +1,7 @@
 import pygame
 import random
 from config import *
+import time
 class Luva(pygame.sprite.Sprite):
 
     def __init__(self, img, x, y):

@@ -8,7 +8,10 @@ def tela_inicial(window):
     imagem_inicial = pygame.transform.scale(imagem_inicial, (largura,altura)) #definir tamanho da imagem
     logo= pygame.image.load("assets/logo.png").convert_alpha()#imagem logo do jogo
     logo=pygame.transform.scale(logo, (700,350))#posicão do logo
-
+    som_inicial = pygame.mixer.music.load('assets\E-A-Gambazada-Viverá-a-Chorar-●-Letras-●-Mancha-alvi-Verde.mp3')
+    pygame.mixer.music.set_volume(0.8)
+    pygame.mixer.music.play(-1)
+   
     font = pygame.font.SysFont(None, 100) #fonte
 
     status = INICIAL

@@ -4,7 +4,7 @@ from sprites import *
 from config import *
 import random
 import pygame
-
+import time
 
 def tela_game(window, luva):
 
@@ -21,7 +21,7 @@ def tela_game(window, luva):
     bola_img = pygame.image.load('assets/bola.png').convert_alpha()#imagem da bola
     bola_img = pygame.transform.scale(bola_img, (200, 200))#tamanho da bola
     defesa=pygame.image.load("assets/defesa.png").convert_alpha()#imagem da defesa
-    defesa=pygame.transform.scale(defesa,(largura,altura))#posicao da imagem da defesa
+    defesa=pygame.transform.scale(defesa,(200,200))#posicao da imagem da defesa
     pos_bolax=largura/2-50
     pos_bolay=altura/2-150
     bola=None
@@ -48,38 +48,58 @@ def tela_game(window, luva):
     all_bola = pygame.sprite.Group()
     bola=Bola(bola_img,pos_bolax,pos_bolay,random.randint(0,700), random.randint(0,1500), random.choice([-1, 1] ))
 
-    all_sprites.add(bola)
     all_bola.add(bola)
+    
+    som_apito = pygame.mixer.music.load('assets/apito.mp3')
+    pygame.mixer.music.set_volume(2)
+    pygame.mixer.music.play(1)
 
+    jogando = False    
+    count = 0
+    font1 = pygame.font.SysFont(None, 100)
+    recorde = 0
     while status == GAME: #looping enquanto game = True
-        clock.tick(FPS)
-
-        window.blit(goleiro, (0, 0))
         
-        mx,my= pygame.mouse.get_pos()
-        luva.rect.centerx = mx
-        luva.rect.centery = my
-        bolas = pygame.sprite.spritecollide(luva, all_bola, True, pygame.sprite.collide_mask)
-        if len(bolas)>0:
-            if bola != None:
+        clock.tick(FPS)
+        jogando = count > 15
+        
+        if not jogando:
+            count += 1
+            texto(window, font1, 'Prepare-se!!!', branco, largura/2, altura/2)
+        else:
+            mx,my= pygame.mouse.get_pos()
+            luva.rect.centerx = mx
+            luva.rect.centery = my
+            bolas = pygame.sprite.spritecollide(luva, all_bola, False, pygame.sprite.collide_mask)
+            
+    
+            if len(bolas)>0 and bola.profundidade > 62:
+                recorde += 1
+                som_defesa = pygame.mixer.music.load('assets\defesa.mp3')
+                pygame.mixer.music.set_volume(2)
+                pygame.mixer.music.play(1)
+                som_chute = pygame.mixer.music.load('assets\chute.mp3')
+                pygame.mixer.music.set_volume(2)
+                pygame.mixer.music.play(1)
                 bola.kill()
-            bola=Bola(bola_img,pos_bolax,pos_bolay,random.randint(0,700), random.randint(0,1500), random.choice([-1, 1] ))
-            all_sprites.empty()
-            all_sprites.add(bola)
-            all_sprites.add(luva)
-            all_bola.add(bola)
-            window.blit(defesa, (0,0))
-            pygame.display.update()
-        if len(all_bola) == 0:
-           status = OVER
+                bola=Bola(bola_img,pos_bolax,pos_bolay,random.randint(0,700), random.randint(0,1500), random.choice([-1, 1] ))
+                all_sprites.empty()
+                all_sprites.add(luva)
+                all_bola.add(bola)
+        
+            if len(all_bola) == 0:
+                status = OVER
 
-        for event in pygame.event.get(): 
-            if event.type == pygame.QUIT:
-                status = QUIT
+            for event in pygame.event.get(): 
+                if event.type == pygame.QUIT:
+                    status = QUIT
 
-        all_sprites.update()
+            all_sprites.update()
+            all_bola.update()
         window.fill((0, 0, 0))  # Preenche com a cor branca
         window.blit(goleiro, (0, 0))
-        all_sprites.draw(window)
+        if count >= 15:
+            all_bola.draw(window)
+            all_sprites.draw(window)
         pygame.display.update()
     return status
