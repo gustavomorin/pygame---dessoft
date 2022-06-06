@@ -31,6 +31,7 @@ pos_bolax=largura/2-50
 pos_bolay=altura/2-150
 troca_vel = True
 defesas=0
+recorde = 0
 
 clock = pygame.time.Clock()
 font = pygame.font.SysFont(None, 100) #fonte
@@ -74,10 +75,12 @@ while status != QUIT:
         pygame.display.update()
 
     if status == GAME:
-        status = tela_game(window, luva)   
+        status,recorde = tela_game(window, luva)
 
     if status == OVER:
-        status =  tela_final(window)
+        status =  tela_final(window, recorde)
+        recorde = 0
+
     
 
 pygame.quit()

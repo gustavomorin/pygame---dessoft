@@ -27,6 +27,7 @@ def tela_game(window, luva):
     bola=None
     mx,my= pygame.mouse.get_pos()
 
+
     if luva == 'brasil':
         luva_img = luva_brasil 
     if luva == 'alemanha':
@@ -102,4 +103,4 @@ def tela_game(window, luva):
             all_bola.draw(window)
             all_sprites.draw(window)
         pygame.display.update()
-    return status
+    return status, recorde
